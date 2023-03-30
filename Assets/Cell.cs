@@ -11,22 +11,17 @@ namespace Assets
 
         public CellType Type { get; private set; }
 
-        public Cell(GameObject Object, CellType Type = CellType.EMPTY)
+        public Cell(GameObject Object)
         {
             this.Object = Object;
-            this.Type = Type;
+            this.Type = CellType.EMPTY;
 
             var Renderer = this.Object.GetComponent<Renderer>();
             Assert.IsNotNull(Renderer, "No renderer found on Cell Object.");
             Assert.IsNotNull(Renderer.material, "No material found on Cell Object Renderer.");
 
-            this.RendererMaterial = new Material(Renderer.material);
-            Renderer.material = this.RendererMaterial;
-        }
-
-        public void SetColor(Color Color)
-        {
-            this.RendererMaterial.SetColor(MaterialColorName, Color);
+            Renderer.material = new Material(Renderer.material);
+            this.RendererMaterial = Renderer.material;
         }
 
         public void SetPosition(int X, int Y, float GridSpacing)
@@ -42,7 +37,7 @@ namespace Assets
         public void SetTypeAndColor(CellType NewType, Color Color)
         {
             this.Type = NewType;
-            this.SetColor(Color);
+            this.RendererMaterial.SetColor(MaterialColorName, Color);
         }
     }
 

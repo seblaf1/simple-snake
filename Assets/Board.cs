@@ -212,7 +212,7 @@ namespace Assets
                     Cell.SetScale(this.BoardSpacing);
 
                     // By default, cells are all empty.
-                    Cell.SetColor(this.EmptyColor);
+                    Cell.SetTypeAndColor(CellType.EMPTY, this.EmptyColor);
 
                     this.Cells[X, Y] = Cell;
                 }
